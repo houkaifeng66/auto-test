@@ -1,18 +1,20 @@
-# 核心引擎与请求
-requests
-
-# 测试框架与报告
-pytest
-allure-pytest
-
-# 数据解析与配置
-pyyaml
-jsonpath-ng
-
-# 变量处理
-# threading 是内置库，不需要安装
-
-# 提高开发体验（可选）
-loguru
-
-
+﻿allure-pytest==2.15.3
+allure-python-commons==2.15.3
+attrs==25.3.0
+certifi==2026.2.25
+charset-normalizer==3.4.7
+colorama==0.4.6
+exceptiongroup==1.3.1
+idna==3.11
+iniconfig==2.1.0
+jsonpath-ng==1.8.0
+loguru==0.7.3
+packaging==26.0
+pluggy==1.5.0
+pytest==8.3.5
+PyYAML==6.0.3
+requests==2.32.4
+tomli==2.4.1
+typing_extensions==4.13.2
+urllib3==2.2.3
+win32_setctime==1.2.0
