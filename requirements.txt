@@ -1,0 +1,18 @@
+# 核心引擎与请求
+requests
+
+# 测试框架与报告
+pytest
+allure-pytest
+
+# 数据解析与配置
+pyyaml
+jsonpath-ng
+
+# 变量处理
+# threading 是内置库，不需要安装
+
+# 提高开发体验（可选）
+loguru
+
+

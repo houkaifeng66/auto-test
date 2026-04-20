@@ -1,0 +1,11 @@
+- name: 删除订单
+  request:
+    method: POST 
+    url: /admin/order/delete
+    json: 
+      orderId: 605
+    headers:
+      x-litemall-admin-token: ${token}
+  validate:
+  - eq: ["status_code",200]
+  - eq: ["body.errmsg","成功"]

@@ -1,0 +1,13 @@
+- name: 登录
+  request:
+      method: "POST"
+      url: /admin/auth/login
+      json:
+        username: "hogwarts"
+        password: "test12345"
+        code: "" 
+  extract:
+    token: body.data.token
+  validate: 
+    - eq: ["status_code",200]
+    - eq: [body.errno,0]

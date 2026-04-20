@@ -1,0 +1,29 @@
+# 1. 忽略 Python 运行产生的缓存（最重要）
+**/__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# 2. 忽略虚拟环境（不要把几百MB的库传上去）
+venv/
+.venv/
+env/
+
+# 3. 忽略测试报告相关
+# 如果你想在 Git 上看报告则不忽略，但通常建议忽略，由 Jenkins 生成
+allure_results/
+reports/
+htmlcov/
+.coverage
+
+# 4. 忽略本地 IDE 配置
+.vscode/
+.idea/
+
+# 5. 忽略日志和临时文件
+*.log
+tmp/
+
+# 6. 忽略敏感配置文件（如果你有的话）
+config.yaml
+.env

@@ -1,0 +1,13 @@
+- name: 查询订单
+  request: 
+    method: GET
+    url: /admin/order/detail
+    params:
+      id: 605
+    headers:
+      x-litemall-admin-token: ${token}
+  validate:
+    - eq: ["status_code",200]
+    - eq: [body.errmsg,"成功"]
+    - eq: [body.data.order.deleted,TRUE]
+    - eq: [body.data.orderGoods,[]]
