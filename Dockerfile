@@ -1,5 +1,8 @@
-# 使用 Python 官方镜像
-FROM python:3.9-slim
+# 使用 Python 国内能直连的地址 国内镜像源
+FROM docker.1ms.run/library/python:3.9-slim
+
+# 强制让容器使用上海时区
+ENV TZ=Asia/Shanghai
 
 # 设置工作目录
 WORKDIR /app

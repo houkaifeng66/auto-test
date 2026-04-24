@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  # 1. 测试执行服务
+  auto-test:
+    image: my-auto-test
+    build: .
+    volumes:
+      - ./reports:/app/reports
+    # 这个容器跑完就停，所以不需要特别的重启策略
+
+
+  # 2. 报告展示服务
+  allure-report:
+    image: docker.1ms.run/frankescobar/allure-docker-service
+    container_name: allure-report-ui
+    ports:
+      - "5050:5050"
+    environment:
+      - CHECK_RESULTS_EVERY_SECONDS=3
+    volumes:
+      - ./reports/allure_results:/app/allure-results
+    restart: always
