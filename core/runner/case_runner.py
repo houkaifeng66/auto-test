@@ -5,17 +5,20 @@ from core.extract.extract_engine import ExtractEngine
 from core.render.render_engine import RenderEngine
 import allure
 
+
 class CaseRunner:
-    def __init__(self,engine,case_map):
+    def __init__(self,engine,case_map,db=None):
         self.engine = engine
         self.case_map = case_map
-        self.assert_response = AssertEngine()
+        self.assert_engine = AssertEngine()
         self.extract_response = ExtractEngine()
         self.render_engine = RenderEngine()
+        self.db = db
 
 
     def case_runner(self,runnable_case):
-        response = None
+
+        response = None #为什么加none来着
         runnable_case = self.render_engine.render(runnable_case)
         name = runnable_case.get("name","未命名用例")
 
@@ -48,22 +51,30 @@ class CaseRunner:
             )
             
              
-             
-
-
              validate_rules = runnable_case.get("validate")
              if validate_rules:
-                self.assert_response.assert_response(response,validate_rules)
-            
+                self.assert_engine.assert_response(response,validate_rules)
 
-             
+
              extract_rules = runnable_case.get("extract")
              if extract_rules:
                 self.extract_response.extract_engine(response,extract_rules)            
              allure.attach(str(response.request.url), "请求地址", allure.attachment_type.TEXT)
              allure.attach(str(request_data),"请求数据",allure.attachment_type.JSON)
              allure.attach(str(response.text), "响应正文", allure.attachment_type.JSON)
-             
+
+        db_validate = runnable_case.get("db_validate") 
+        if db_validate and self.db:
+             with allure.step(f"数据库校验：{name}"):
+                sql = db_validate.get("sql")
+                db_data = self.db.query_one(sql)
+                allure.attach(str(sql), "执行SQL", allure.attachment_type.TEXT)
+                allure.attach(str(db_data), "查询结果", allure.attachment_type.JSON)
+                if db_validate.get("expect") and db_data:
+                    self.assert_engine.assert_response(db_data, db_validate["expect"], mode="db")
+
+
+
         return response
 
 

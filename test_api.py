@@ -11,10 +11,12 @@ case_map, runnable_case = loader.load_cases()
 
 print(f"找到的用例数量为{len(runnable_case)}")
 
-runner = CaseRunner(engine,case_map)
-
 
 class Test_Api:
     @pytest.mark.parametrize("runnable_case",runnable_case,ids= [c.get("name") for c in runnable_case])
-    def test_api(self,runnable_case):
+    def test_api(self,runnable_case,db):
+        runner = CaseRunner(engine,case_map,db)
         runner.case_runner(runnable_case)
+
+
+
