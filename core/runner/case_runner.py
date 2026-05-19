@@ -18,7 +18,7 @@ class CaseRunner:
 
     def case_runner(self,runnable_case):
 
-        response = None #为什么加none来着
+        response = None 
         runnable_case = self.render_engine.render(runnable_case)
         name = runnable_case.get("name","未命名用例")
 
