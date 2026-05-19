@@ -4,8 +4,8 @@ import json
 import requests
 
 def send_feishu_notification(passed, failed, total, report_url="http://localhost:5050"):
-    # 替换成你真实的 Webhook 地址
-    webhook_url = "https://open.feishu.cn/open-apis/bot/v2/hook/871c814e-60ad-4b99-8bf0-bb75481dba45"
+    
+    webhook_url = "Webhook 地址"
     
     # 构造飞书卡片消息
     payload = {
@@ -42,6 +42,6 @@ def get_real_url():
         public_url = res.json()['tunnels'][0]['public_url']
         return public_url
     except:
-        # 没开穿透就返回你公司的局域网 IP
+    
         company_ip = f"http://{my_ip}:5050"
         return company_ip    
